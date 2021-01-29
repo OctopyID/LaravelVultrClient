@@ -4,6 +4,7 @@ namespace Octopy\Vultr;
 
 use Throwable;
 use Mockery\MockInterface;
+use Octopy\Vultr\Api\Plan;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Octopy\Vultr\Api\Account;
@@ -16,6 +17,7 @@ use Octopy\Vultr\Adapter\AdapterInterface;
 /**
  * @property Account     account
  * @property Application application
+ * @property Plan        plan
  */
 class Client
 {

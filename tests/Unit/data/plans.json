@@ -1,0 +1,60 @@
+{
+    "plans": [
+        {
+            "id": "vc2-1c-1gb",
+            "vcpu_count": 1,
+            "ram": 1024,
+            "disk": 25,
+            "bandwidth": 1024,
+            "monthly_cost": 5,
+            "type": "vc2",
+            "locations": [
+                "ewr",
+                "ord",
+                "dfw",
+                "sea",
+                "lax",
+                "atl",
+                "ams",
+                "lhr",
+                "fra",
+                "sjc",
+                "syd",
+                "yto",
+                "cdg",
+                "nrt",
+                "icn",
+                "mia",
+                "sgp"
+            ]
+        },
+        {
+            "id": "vc2-1c-2gb",
+            "vcpu_count": 1,
+            "ram": 2048,
+            "disk": 55,
+            "bandwidth": 2048,
+            "monthly_cost": 10,
+            "type": "vc2",
+            "locations": [
+                "ewr",
+                "ord",
+                "dfw",
+                "sea",
+                "lax",
+                "atl",
+                "ams",
+                "lhr",
+                "fra",
+                "sjc",
+                "syd",
+                "yto",
+                "cdg",
+                "nrt",
+                "icn",
+                "mia",
+                "sgp"
+            ]
+        }
+    ]
+}
