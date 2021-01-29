@@ -6,13 +6,16 @@ use Throwable;
 use Mockery\MockInterface;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
+use Octopy\Vultr\Api\Account;
 use Octopy\Vultr\Api\AbstractApi;
+use Octopy\Vultr\Api\Application;
 use Illuminate\Support\Facades\App;
 use Octopy\Vultr\Adapter\DefaultAdapter;
 use Octopy\Vultr\Adapter\AdapterInterface;
 
 /**
- * @property mixed account
+ * @property Account     account
+ * @property Application application
  */
 class Client
 {
