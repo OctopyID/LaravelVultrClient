@@ -11,13 +11,13 @@ class Application extends AbstractApi
 	 */
 	public function get() : ApplicationHandler
 	{
-		return $this->getLists();
+		return $this->listApplications();
 	}
 
 	/**
 	 * @return ApplicationHandler
 	 */
-	public function getLists() : ApplicationHandler
+	public function listApplications() : ApplicationHandler
 	{
 		return new ApplicationHandler(
 			$this->adapter->get('applications')

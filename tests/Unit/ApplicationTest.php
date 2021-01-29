@@ -27,7 +27,7 @@ class ApplicationTest extends VultrTestCase
 			$data = $this->decodeJSON('applications.json')
 		));
 
-		$fake = $mock->getLists();
+		$fake = $mock->listApplications();
 
 		$this->assertInstanceOf(ApplicationHandler::class, $fake);
 
