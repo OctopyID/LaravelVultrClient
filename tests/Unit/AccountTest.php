@@ -1,4 +1,8 @@
-<?php /** @noinspection PhpArrayShapeAttributeCanBeAddedInspection */
+<?php
+
+/** @noinspection PhpUndefinedFieldInspection */
+
+/** @noinspection PhpArrayShapeAttributeCanBeAddedInspection */
 
 namespace Octopy\Vultr\Tests\Unit;
 

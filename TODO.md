@@ -143,7 +143,7 @@ We are using version 2.x of the Vultr API.
 
 ## [Operating Systems](https://www.vultr.com/api/#tag/os)
 
-- [ ] [List OS](https://www.vultr.com/api/#operation/list-os)
+- [x] [List OS](https://www.vultr.com/api/#operation/list-os)
 
 ## [Plans](https://www.vultr.com/api/#tag/plans)
 

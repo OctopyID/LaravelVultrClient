@@ -11,13 +11,15 @@ use Octopy\Vultr\Api\Account;
 use Octopy\Vultr\Api\AbstractApi;
 use Octopy\Vultr\Api\Application;
 use Illuminate\Support\Facades\App;
+use Octopy\Vultr\Api\OperatingSystem;
 use Octopy\Vultr\Adapter\DefaultAdapter;
 use Octopy\Vultr\Adapter\AdapterInterface;
 
 /**
- * @property Account     account
- * @property Application application
- * @property Plan        plan
+ * @property Account         account
+ * @property Application     application
+ * @property Plan            plan
+ * @property OperatingSystem operatingSystem
  */
 class Client
 {

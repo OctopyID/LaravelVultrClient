@@ -1,0 +1,22 @@
+{
+    "os": [
+        {
+            "id": 124,
+            "name": "Windows 2012 R2 x64",
+            "arch": "x64",
+            "family": "windows"
+        },
+        {
+            "id": 327,
+            "name": "FreeBSD 12 x64",
+            "arch": "x64",
+            "family": "freebsd"
+        },
+        {
+            "id": 352,
+            "name": "Debian 10 x64",
+            "arch": "x64",
+            "family": "debian"
+        }
+    ]
+}

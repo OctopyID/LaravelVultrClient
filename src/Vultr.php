@@ -5,6 +5,7 @@ namespace Octopy\Vultr;
 use Octopy\Vultr\Api\Plan;
 use Octopy\Vultr\Api\Account;
 use Octopy\Vultr\Api\Application;
+use Octopy\Vultr\Api\OperatingSystem;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static |Account account()
  * @method static |Application application()
  * @method static |Plan plan()
+ * @method static |OperatingSystem operatingSystem()
  */
 class Vultr extends Facade
 {

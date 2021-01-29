@@ -24,7 +24,7 @@ class ApplicationTest extends VultrTestCase
 	public function testGetApplications()
 	{
 		$mock = new Application($this->adapter(
-			$data = $this->decodeJSON('applications.json')
+			$data = $this->decodeJSON('application.json')
 		));
 
 		$fake = $mock->listApplications();
