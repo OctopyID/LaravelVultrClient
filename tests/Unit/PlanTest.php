@@ -24,7 +24,7 @@ class PlanTest extends VultrTestCase
 	public function testPlans()
 	{
 		$mock = new Plan($this->adapter(
-			$data = $this->decodeJSON('plans.json')
+			$data = $this->decodeJSON('plans/clouds.json')
 		));
 
 		$this->assertInstanceOf(PlanHandler::class, $fake = $mock->all());
@@ -45,7 +45,7 @@ class PlanTest extends VultrTestCase
 	public function testBareMetals()
 	{
 		$mock = new Plan($this->adapter(
-			$data = $this->decodeJSON('metals.json')
+			$data = $this->decodeJSON('plans/metals.json')
 		));
 
 		$this->assertInstanceOf(BareMetalPlanHandler::class, $fake = $mock->getBareMetals());

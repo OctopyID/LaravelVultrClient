@@ -8,7 +8,7 @@ We are using version 2.x of the Vultr API.
 
 ## [Applications](https://www.vultr.com/api/v2/#tag/application)
 
-- [ ] [List Applications](https://www.vultr.com/api/v2/#operation/list-applications)
+- [x] [List Applications](https://www.vultr.com/api/v2/#operation/list-applications)
 
 ## [Backups](https://www.vultr.com/api/v2/#tag/backup)
 
@@ -147,8 +147,8 @@ We are using version 2.x of the Vultr API.
 
 ## [Plans](https://www.vultr.com/api/v2/#tag/plans)
 
-- [ ] [List Plans](https://www.vultr.com/api/v2/#operation/list-plans)
-- [ ] [List Bare Metal Plans](https://www.vultr.com/api/v2/#operation/list-metal-plans)
+- [x] [List Plans](https://www.vultr.com/api/v2/#operation/list-plans)
+- [x] [List Bare Metal Plans](https://www.vultr.com/api/v2/#operation/list-metal-plans)
 
 ## [Private Networks](https://www.vultr.com/api/v2/#tag/private-Networks)
 
