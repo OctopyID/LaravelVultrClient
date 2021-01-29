@@ -24,29 +24,36 @@ class AccountTest extends VultrTestCase implements HasFakeResponse
 	 */
 	public function testGetAccountInfo()
 	{
+		$fake = $this->fakeResponse('account');
+
 		$account = $this->api(Account::class)->getAccountInfo();
 
 		$this->assertInstanceOf(AccountHandler::class, $account);
 
-		$this->assertEquals($account->toArray(), $this->fakeResponse());
+		$this->assertEquals($account->toArray(), $fake);
 
-		$this->assertEquals(-1, $account->last_payment_amount); // Access the property with the snake_case
-		$this->assertEquals(-1, $account->lastPaymentAmount); // Access the property with the camelCase
+		$this->assertEquals($fake['last_payment_amount'], $account->lastPaymentAmount); // Access the property with the camelCase
+		$this->assertEquals($fake['last_payment_amount'], $account->last_payment_amount); // Access the property with the snake_case
 	}
 
 	/**
+	 * @param  string|null $name
 	 * @return array
 	 */
-	public function fakeResponse() : array
+	public function fakeResponse(string|null $name = null) : array
 	{
-		return [
-			'name'                => 'vultr-api',
-			'email'               => 'api@vultr.com',
-			'acls'                => [],
-			'balance'             => -100,
-			'pending_charges'     => 60,
-			'last_payment_date'   => '2020-10-10T01=>56=>20+00=>00',
-			'last_payment_amount' => -1,
+		$array = [
+			'account' => [
+				'name'                => 'vultr-api',
+				'email'               => 'api@vultr.com',
+				'acls'                => [],
+				'balance'             => -100,
+				'pending_charges'     => 60,
+				'last_payment_date'   => '2020-06-26T07:39:26+00:00',
+				'last_payment_amount' => -1,
+			],
 		];
+
+		return $array[$name] ?? $array;
 	}
 }
