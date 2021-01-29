@@ -1,0 +1,11 @@
+{
+    "account": {
+        "name": "vultr-api",
+        "email": "api@vultr.com",
+        "acls": [],
+        "balance": -100,
+        "pending_charges": 60,
+        "last_payment_date": "2020-06-26T07:39:26+00:00",
+        "last_payment_amount": -1
+    }
+}

@@ -2,13 +2,10 @@
 
 namespace Octopy\Vultr\Tests;
 
-use Exception;
-use Throwable;
 use Octopy\Vultr\Client;
 use Mockery\MockInterface;
 use Orchestra\Testbench\TestCase;
 use Octopy\Vultr\ServiceProvider;
-use Octopy\Vultr\Api\AbstractApi;
 use Illuminate\Foundation\Application;
 use Octopy\Vultr\Adapter\AdapterInterface;
 
@@ -42,31 +39,28 @@ class VultrTestCase extends TestCase
 	}
 
 	/**
+	 * @param  array $data
 	 * @return AdapterInterface|MockInterface
-	 * @throws Throwable
 	 */
-	protected function fakeRequest() : AdapterInterface|MockInterface
+	protected function adapter(array $data = []) : AdapterInterface|MockInterface
 	{
-		throw_unless($this instanceof HasFakeResponse, new Exception(
-			__CLASS__ . ' should implement with HasFakeResponse interface.'
-		));
-
-		return $this->mock(AdapterInterface::class, function (MockInterface $mock) {
-			$mock->shouldReceive('get')->andReturn($this->fakeResponse());
+		return $this->mock(AdapterInterface::class, function (MockInterface $mock) use ($data) {
+			$mock->shouldReceive('get')->andReturn($data);
 		});
 	}
 
 	/**
-	 * @param  AbstractApi|string $api
-	 * @return mixed
-	 * @throws Throwable
+	 * @param  string|array $data
+	 * @return array
 	 */
-	protected function api(AbstractApi|string $api) : mixed
+	protected function decodeJSON(string|array $data) : array
 	{
-		if (is_string($api)) {
-			return new $api($this->fakeRequest());
+		if (is_string($data)) {
+			return json_decode(file_get_contents(
+				__DIR__ . '/Unit/data/' . $data
+			), true);
 		}
 
-		return $api;
+		return $data;
 	}
 }
