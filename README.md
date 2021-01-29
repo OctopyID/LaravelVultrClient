@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://img.shields.io/circleci/project/OctopyID/LaravelVultrClient/master.svg?style=for-the-badge" alt="Build Status">
+    <img src="https://img.shields.io/circleci/build/gh/OctopyID/LaravelVultrClient/main.svg?style=for-the-badge" alt="Build Status">
     <img src="https://img.shields.io/github/license/OctopyID/LaravelVultrClient.svg?style=for-the-badge" alt="License">
     <img src="https://img.shields.io/packagist/v/octopyid/laravel-vultr.svg?style=for-the-badge" alt="Version">
     <img src="https://img.shields.io/packagist/dt/octopyid/laravel-vultr.svg?style=for-the-badge" alt="Downloads">
