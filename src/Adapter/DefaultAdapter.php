@@ -8,7 +8,6 @@ use Illuminate\Http\Client\PendingRequest;
 
 class DefaultAdapter implements AdapterInterface
 {
-
 	/**
 	 * @var int
 	 */
@@ -105,6 +104,46 @@ class DefaultAdapter implements AdapterInterface
 	}
 
 	/**
+	 * @param  string $path
+	 * @param  array  $query
+	 * @return array|null
+	 */
+	public function put(string $path, array $query = []) : array|null
+	{
+		return $this->handle('PUT', $path, $query);
+	}
+
+	/**
+	 * @param  string $path
+	 * @param  array  $query
+	 * @return array|null
+	 */
+	public function post(string $path, array $query = []) : array|null
+	{
+		return $this->handle('POST', $path, $query);
+	}
+
+	/**
+	 * @param  string $path
+	 * @param  array  $query
+	 * @return array|null
+	 */
+	public function patch(string $path, array $query = []) : array|null
+	{
+		return $this->handle('PATCH', $path, $query);
+	}
+
+	/**
+	 * @param  string $path
+	 * @param  array  $query
+	 * @return array|null
+	 */
+	public function delete(string $path, array $query = []) : array|null
+	{
+		return $this->handle('DELETE', $path, $query);
+	}
+
+	/**
 	 * @param  string $method
 	 * @param  string $path
 	 * @param  array  $query
@@ -114,6 +153,10 @@ class DefaultAdapter implements AdapterInterface
 	{
 		return (match ($method) {
 			'GET' => $this->getClient()->get($path, $query),
+			'PUT' => $this->getClient()->put($path, $query),
+			'POST' => $this->getClient()->post($path, $query),
+			'PATCH' => $this->getClient()->patch($path, $query),
+			'DELETE' => $this->getClient()->delete($path, $query),
 		})->json();
 	}
 
