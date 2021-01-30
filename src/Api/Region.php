@@ -85,7 +85,7 @@ class Region extends AbstractApi
 	 * @return Collection
 	 * @throws Throwable
 	 */
-	public function listAvailableHighCompute(string $id) : Collection
+	public function listAvailableHighFrequency(string $id) : Collection
 	{
 		return $this->listAvailableComputeInRegion($id, 'vhf');
 	}
@@ -148,7 +148,7 @@ class Region extends AbstractApi
 	 * @param  string       $alias
 	 * @return Region
 	 */
-	public function withAvailableHighCompute(Closure|null $callback = null, string $alias = 'plans') : Region
+	public function withAvailableHighFrequency(Closure|null $callback = null, string $alias = 'plans') : Region
 	{
 		return $this->withAvailableComputeInRegion(Region::HIGH_FREQUENCY, $callback, $alias);
 	}
