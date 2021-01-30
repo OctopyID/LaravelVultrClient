@@ -70,14 +70,21 @@ final class Relation
 	 */
 	public function handle(AbstractHandler $handler, AbstractApi $api) : AbstractHandler
 	{
-		$result = $this->result;
 		$this->where([
 			$this->primary => $handler->{$this->primary},
 		]);
 
-		return $handler->put(($this->alias ?? $this->method), $result(
-			$api->{$this->method}(...$this->getParameters($api))
+		$property = $this->alias ?? $this->method;
+
+		$result = call_user_func($this->result, $api->{$this->method}(
+			...$this->getParameters($api)
 		));
+
+		if ($handler->has($property)) {
+			$result = $handler->get($property)->merge($result);
+		}
+
+		return $handler->put($property, $result);
 	}
 
 	/**

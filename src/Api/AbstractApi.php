@@ -60,6 +60,8 @@ abstract class AbstractApi
 			$relation = $callback;
 		}
 
+		// TODO : Simplifying this Code
+
 		if (preg_match('/:/', $relation)) {
 			[$method, $primary] = array_map('trim', explode(':', $relation, 2));
 		} else {
