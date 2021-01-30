@@ -29,9 +29,9 @@ class PlanTest extends VultrTestCase
 
 		$fake = $mock->listPlans();
 
-		$this->assertInstanceOf(PlanHandler::class, $mock->getHighComputes());
-		$this->assertInstanceOf(PlanHandler::class, $mock->getCloudComputes());
-		$this->assertInstanceOf(PlanHandler::class, $mock->getDedicatedClouds());
+		$this->assertInstanceOf(PlanHandler::class, $mock->listHighComputePlans());
+		$this->assertInstanceOf(PlanHandler::class, $mock->listCloudComputePlans());
+		$this->assertInstanceOf(PlanHandler::class, $mock->listDedicatedCloudPlans());
 
 		$this->assertEquals($data['plans'][0], $fake->first()->toArray());
 

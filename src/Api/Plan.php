@@ -14,7 +14,7 @@ class Plan extends AbstractApi
 	 * @return PlanHandler
 	 * @throws Throwable
 	 */
-	public function getCloudComputes() : PlanHandler
+	public function listCloudComputePlans() : PlanHandler
 	{
 		return $this->listPlans('vc2');
 	}
@@ -23,7 +23,7 @@ class Plan extends AbstractApi
 	 * @return PlanHandler
 	 * @throws Throwable
 	 */
-	public function getHighComputes() : PlanHandler
+	public function listHighComputePlans() : PlanHandler
 	{
 		return $this->listPlans('vhf');
 	}
@@ -32,7 +32,7 @@ class Plan extends AbstractApi
 	 * @return PlanHandler
 	 * @throws Throwable
 	 */
-	public function getDedicatedClouds() : PlanHandler
+	public function listDedicatedCloudPlans() : PlanHandler
 	{
 		return $this->listPlans('vdc');
 	}
