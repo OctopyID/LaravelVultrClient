@@ -6,6 +6,7 @@ use Throwable;
 use Mockery\MockInterface;
 use Octopy\Vultr\Api\Plan;
 use Illuminate\Support\Str;
+use Octopy\Vultr\Api\Region;
 use InvalidArgumentException;
 use Octopy\Vultr\Api\Account;
 use Octopy\Vultr\Api\AbstractApi;
@@ -20,6 +21,7 @@ use Octopy\Vultr\Adapter\AdapterInterface;
  * @property Application     application
  * @property Plan            plan
  * @property OperatingSystem operatingSystem
+ * @property Region          region
  */
 class Client
 {

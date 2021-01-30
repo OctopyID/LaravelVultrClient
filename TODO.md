@@ -170,8 +170,8 @@ We are using version 2.x of the Vultr API.
 
 ## [Regions](https://www.vultr.com/api/#tag/region)
 
-- [ ] [List Regions](https://www.vultr.com/api/#operation/list-regions)
-- [ ] [List Available Compute in Region](https://www.vultr.com/api/#operation/list-available-compute-region)
+- [x] [List Regions](https://www.vultr.com/api/#operation/list-regions)
+- [x] [List Available Compute in Region](https://www.vultr.com/api/#operation/list-available-compute-region)
 
 ## [Snapshots](https://www.vultr.com/api/#tag/snapshot)
 
