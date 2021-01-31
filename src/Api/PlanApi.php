@@ -3,13 +3,12 @@
 
 namespace Octopy\Vultr\Api;
 
-use Exception;
 use Throwable;
 use Octopy\Vultr\Entity\Plan;
 use Octopy\Vultr\Entity\BareMetal;
-use Octopy\Vultr\Api\Contracts\Plan as PlanContract;
+use Octopy\Vultr\Api\Support\Plan as Support;
 
-class PlanApi extends AbstractApi implements PlanContract
+class PlanApi extends AbstractApi
 {
 	/**
 	 * @return Plan
@@ -17,7 +16,7 @@ class PlanApi extends AbstractApi implements PlanContract
 	 */
 	public function listCloudComputePlans() : Plan
 	{
-		return $this->listPlans(PlanContract::CLOUD_COMPUTE);
+		return $this->listPlans(Support::CLOUD_COMPUTE);
 	}
 
 	/**
@@ -26,7 +25,7 @@ class PlanApi extends AbstractApi implements PlanContract
 	 */
 	public function listHighFrequencyPlans() : Plan
 	{
-		return $this->listPlans(PlanContract::HIGH_FREQUENCY);
+		return $this->listPlans(Support::HIGH_FREQUENCY);
 	}
 
 	/**
@@ -35,7 +34,7 @@ class PlanApi extends AbstractApi implements PlanContract
 	 */
 	public function listDedicatedCloudPlans() : Plan
 	{
-		return $this->listPlans(PlanContract::CLOUD_COMPUTE);
+		return $this->listPlans(Support::CLOUD_COMPUTE);
 	}
 
 	/**
@@ -49,13 +48,7 @@ class PlanApi extends AbstractApi implements PlanContract
 			return $this->listBareMetalPlans();
 		}
 
-		$types = [
-			'all', 'vc2', 'vhf', 'vdc',
-		];
-
-		throw_unless(in_array($type, $types, true), new Exception(
-			'Unknown type, the allowed type is ' . implode(', ', $types)
-		));
+		Support::except(Support::BARE_METAL)->validate($type);
 
 		return new Plan(
 			$this->adapter()->get('plans', compact('type'))

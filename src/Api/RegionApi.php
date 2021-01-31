@@ -6,14 +6,13 @@ namespace Octopy\Vultr\Api;
 
 use Closure;
 use Throwable;
-use Exception;
 use Octopy\Vultr\Relation;
 use Octopy\Vultr\Entity\Region;
 use Illuminate\Support\Collection;
-use Octopy\Vultr\Api\Contracts\Plan;
+use Octopy\Vultr\Api\Support\Plan;
 use Octopy\Vultr\Entity\AbstractEntity;
 
-class RegionApi extends AbstractApi implements Plan
+class RegionApi extends AbstractApi
 {
 	/**
 	 * @return Region|AbstractEntity
@@ -33,17 +32,11 @@ class RegionApi extends AbstractApi implements Plan
 	 */
 	public function listAvailableComputeInRegion(string $id, string $type = 'all') : Collection
 	{
-		$types = [
-			'all', 'vc2', 'vhf', 'vdc', 'vbm',
-		];
+		if (Plan::except([])->validate($type)) {
+			$result = $this->adapter()->get('/regions/' . $id . '/availability', compact('type'));
 
-		throw_unless(in_array($type, $types, true), new Exception(
-			'Unknown type, the allowed type is ' . implode(', ', $types)
-		));
-
-		$result = $this->adapter()->get('/regions/' . $id . '/availability', compact('type'));
-
-		return collect($result['available_plans']);
+			return collect($result['available_plans']);
+		}
 	}
 
 	/**
