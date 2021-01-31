@@ -8,7 +8,7 @@ use ReflectionMethod;
 use ReflectionException;
 use ReflectionParameter;
 use Octopy\Vultr\Api\AbstractApi;
-use Octopy\Vultr\Handler\AbstractHandler;
+use Octopy\Vultr\Entity\AbstractEntity;
 
 final class Relation
 {
@@ -63,12 +63,12 @@ final class Relation
 	}
 
 	/**
-	 * @param  AbstractHandler $handler
-	 * @param  AbstractApi     $api
-	 * @return AbstractHandler
+	 * @param  AbstractEntity $handler
+	 * @param  AbstractApi    $api
+	 * @return AbstractEntity
 	 * @throws ReflectionException
 	 */
-	public function handle(AbstractHandler $handler, AbstractApi $api) : AbstractHandler
+	public function handle(AbstractEntity $handler, AbstractApi $api) : AbstractEntity
 	{
 		$this->where([
 			$this->primary => $handler->{$this->primary},

@@ -1,6 +1,6 @@
 <?php
 
-namespace Octopy\Vultr\Handler;
+namespace Octopy\Vultr\Entity;
 
 /**
  * @property string id
@@ -14,7 +14,7 @@ namespace Octopy\Vultr\Handler;
  * @property string type
  * @property array  locations
  */
-class BareMetalPlanHandler extends AbstractHandler
+class BareMetal extends AbstractEntity
 {
 	/**
 	 * @var string

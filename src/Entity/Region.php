@@ -1,6 +1,6 @@
 <?php
 
-namespace Octopy\Vultr\Handler;
+namespace Octopy\Vultr\Entity;
 
 /**
  * @property string id
@@ -9,7 +9,7 @@ namespace Octopy\Vultr\Handler;
  * @property string continent
  * @property array  options
  */
-class RegionHandler extends AbstractHandler
+class Region extends AbstractEntity
 {
 	/**
 	 * @var string

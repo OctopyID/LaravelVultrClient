@@ -4,17 +4,17 @@ namespace Octopy\Vultr\Tests\Unit;
 
 use Throwable;
 use Octopy\Vultr\Tests\VultrTestCase;
-use Octopy\Vultr\Api\OperatingSystem;
-use Octopy\Vultr\Handler\OperatingSystemHandler;
+use Octopy\Vultr\Api\OperatingSystemApi;
+use Octopy\Vultr\Entity\OperatingSystem;
 
 class OperatingSystemTest extends VultrTestCase
 {
 	/**
 	 * @return void
 	 */
-	public function testApplication()
+	public function testOperatingSystem()
 	{
-		$this->assertInstanceOf(OperatingSystem::class, $this->vultr->operatingSystem);
+		$this->assertInstanceOf(OperatingSystemApi::class, $this->vultr->operatingSystem);
 	}
 
 	/**
@@ -23,17 +23,17 @@ class OperatingSystemTest extends VultrTestCase
 	 */
 	public function testGetApplications()
 	{
-		$mock = new OperatingSystem($this->adapter(
+		$mock = new OperatingSystemApi($this->adapter(
 			$data = $this->decodeJSON('operating-system.json')
 		));
 
 		$fake = $mock->listImages();
 
-		$this->assertInstanceOf(OperatingSystemHandler::class, $fake);
+		$this->assertInstanceOf(OperatingSystem::class, $fake);
 
 		$this->assertEquals($fake->toArray(), $data['os']);
 
-		$this->assertInstanceOf(OperatingSystemHandler::class, $fake->first());
+		$this->assertInstanceOf(OperatingSystem::class, $fake->first());
 
 		$this->assertEquals($data['os'][2], $fake->last()->toArray());
 		$this->assertEquals($data['os'][0], $fake->first()->toArray());

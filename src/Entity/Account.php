@@ -1,6 +1,6 @@
 <?php
 
-namespace Octopy\Vultr\Handler;
+namespace Octopy\Vultr\Entity;
 
 /**
  * @property string name
@@ -11,7 +11,7 @@ namespace Octopy\Vultr\Handler;
  * @property string lastPaymentDate
  * @property int    lastPaymentAmount
  */
-final class AccountHandler extends AbstractHandler
+final class Account extends AbstractEntity
 {
 	/**
 	 * @var string

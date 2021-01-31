@@ -1,11 +1,11 @@
 <?php
 
-namespace Octopy\Vultr\Handler;
+namespace Octopy\Vultr\Entity;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 
-abstract class AbstractHandler extends Collection
+abstract class AbstractEntity extends Collection
 {
 	/**
 	 * @var string
@@ -13,7 +13,7 @@ abstract class AbstractHandler extends Collection
 	protected string $name;
 
 	/**
-	 * AbstractHandler constructor.
+	 * AbstractEntity constructor.
 	 * @param  array $response
 	 */
 	public function __construct(array $response)

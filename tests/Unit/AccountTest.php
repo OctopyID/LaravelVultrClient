@@ -7,9 +7,9 @@
 namespace Octopy\Vultr\Tests\Unit;
 
 use Throwable;
-use Octopy\Vultr\Api\Account;
+use Octopy\Vultr\Api\AccountApi;
+use Octopy\Vultr\Entity\Account;
 use Octopy\Vultr\Tests\VultrTestCase;
-use Octopy\Vultr\Handler\AccountHandler;
 
 class AccountTest extends VultrTestCase
 {
@@ -18,7 +18,7 @@ class AccountTest extends VultrTestCase
 	 */
 	public function testAccount()
 	{
-		$this->assertInstanceOf(Account::class, $this->vultr->account);
+		$this->assertInstanceOf(AccountApi::class, $this->vultr->account);
 	}
 
 	/**
@@ -27,13 +27,13 @@ class AccountTest extends VultrTestCase
 	 */
 	public function testGetAccountInfo()
 	{
-		$mock = new Account($this->adapter(
+		$mock = new AccountApi($this->adapter(
 			$data = $this->decodeJSON('account.json')
 		));
 
 		$fake = $mock->getAccountInfo();
 
-		$this->assertInstanceOf(AccountHandler::class, $fake);
+		$this->assertInstanceOf(Account::class, $fake);
 
 		$this->assertEquals($fake->toArray(), $data['account']);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Octopy\Vultr\Handler;
+namespace Octopy\Vultr\Entity;
 
 /**
  * @property int    id
@@ -8,7 +8,7 @@ namespace Octopy\Vultr\Handler;
  * @property string arch
  * @property string family
  */
-class OperatingSystemHandler extends AbstractHandler
+class OperatingSystem extends AbstractEntity
 {
 	/**
 	 * @var string

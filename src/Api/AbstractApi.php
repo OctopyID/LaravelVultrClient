@@ -5,7 +5,7 @@ namespace Octopy\Vultr\Api;
 use Closure;
 use Octopy\Vultr\Relation;
 use Illuminate\Support\Str;
-use Octopy\Vultr\Handler\AbstractHandler;
+use Octopy\Vultr\Entity\AbstractEntity;
 use Octopy\Vultr\Adapter\AdapterInterface;
 
 abstract class AbstractApi
@@ -84,13 +84,13 @@ abstract class AbstractApi
 	}
 
 	/**
-	 * @param  AbstractHandler $handler
-	 * @return AbstractHandler
+	 * @param  AbstractEntity $handler
+	 * @return AbstractEntity
 	 */
-	protected function handle(AbstractHandler $handler) : AbstractHandler
+	protected function handle(AbstractEntity $handler) : AbstractEntity
 	{
 		foreach ($this->relations as $builder) {
-			$handler = $handler->map(function (AbstractHandler $handler) use ($builder) {
+			$handler = $handler->map(function (AbstractEntity $handler) use ($builder) {
 				return $builder->handle($handler, $this);
 			});
 		}

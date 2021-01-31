@@ -1,6 +1,6 @@
 <?php
 
-namespace Octopy\Vultr\Handler;
+namespace Octopy\Vultr\Entity;
 
 /**
  * @property int    id
@@ -8,7 +8,7 @@ namespace Octopy\Vultr\Handler;
  * @property string shortName
  * @property string deployName
  */
-final class ApplicationHandler extends AbstractHandler
+final class Application extends AbstractEntity
 {
 	/**
 	 * @var string

@@ -3,9 +3,9 @@
 namespace Octopy\Vultr\Tests\Unit;
 
 use Throwable;
-use Octopy\Vultr\Api\Application;
+use Octopy\Vultr\Api\ApplicationApi;
+use Octopy\Vultr\Entity\Application;
 use Octopy\Vultr\Tests\VultrTestCase;
-use Octopy\Vultr\Handler\ApplicationHandler;
 
 class ApplicationTest extends VultrTestCase
 {
@@ -14,7 +14,7 @@ class ApplicationTest extends VultrTestCase
 	 */
 	public function testApplication()
 	{
-		$this->assertInstanceOf(Application::class, $this->vultr->application);
+		$this->assertInstanceOf(ApplicationApi::class, $this->vultr->application);
 	}
 
 	/**
@@ -23,17 +23,17 @@ class ApplicationTest extends VultrTestCase
 	 */
 	public function testGetApplications()
 	{
-		$mock = new Application($this->adapter(
+		$mock = new ApplicationApi($this->adapter(
 			$data = $this->decodeJSON('application.json')
 		));
 
 		$fake = $mock->listApplications();
 
-		$this->assertInstanceOf(ApplicationHandler::class, $fake);
+		$this->assertInstanceOf(Application::class, $fake);
 
 		$this->assertEquals($fake->toArray(), $data['applications']);
 
-		$this->assertInstanceOf(ApplicationHandler::class, $fake->first());
+		$this->assertInstanceOf(Application::class, $fake->first());
 
 		$this->assertEquals($data['applications'][2], $fake->last()->toArray());
 		$this->assertEquals($data['applications'][0], $fake->first()->toArray());

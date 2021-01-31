@@ -3,10 +3,10 @@
 namespace Octopy\Vultr\Tests\Unit;
 
 use Throwable;
-use Octopy\Vultr\Api\Region;
+use Octopy\Vultr\Api\RegionApi;
+use Octopy\Vultr\Entity\Region;
 use Illuminate\Support\Collection;
 use Octopy\Vultr\Tests\VultrTestCase;
-use Octopy\Vultr\Handler\RegionHandler;
 
 class RegionTest extends VultrTestCase
 {
@@ -15,7 +15,7 @@ class RegionTest extends VultrTestCase
 	 */
 	public function testRegion()
 	{
-		$this->assertInstanceOf(Region::class, $this->vultr->region);
+		$this->assertInstanceOf(RegionApi::class, $this->vultr->region);
 	}
 
 	/**
@@ -23,13 +23,13 @@ class RegionTest extends VultrTestCase
 	 */
 	public function testListRegions()
 	{
-		$mock = new Region($this->adapter(
+		$mock = new RegionApi($this->adapter(
 			$data = $this->decodeJSON('regions/region.json')
 		));
 
 		$fake = $mock->listRegions();
 
-		$this->assertInstanceOf(RegionHandler::class, $fake);
+		$this->assertInstanceOf(Region::class, $fake);
 
 		$this->assertEquals($data['regions'][0], $fake->first()->toArray());
 
@@ -41,7 +41,7 @@ class RegionTest extends VultrTestCase
 	 */
 	public function testListAvailableComputeInRegion()
 	{
-		$mock = new Region($this->adapter(
+		$mock = new RegionApi($this->adapter(
 			$data = [
 				'available_plans' => [
 					"vc2-1c-1gb",

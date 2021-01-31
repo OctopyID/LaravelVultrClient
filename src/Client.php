@@ -4,24 +4,26 @@ namespace Octopy\Vultr;
 
 use Throwable;
 use Mockery\MockInterface;
-use Octopy\Vultr\Api\Plan;
 use Illuminate\Support\Str;
-use Octopy\Vultr\Api\Region;
+use Octopy\Vultr\Api\PlanApi;
 use InvalidArgumentException;
-use Octopy\Vultr\Api\Account;
+use Octopy\Vultr\Api\RegionApi;
+use Octopy\Vultr\Api\AccountApi;
+use Octopy\Vultr\Api\InstanceApi;
 use Octopy\Vultr\Api\AbstractApi;
-use Octopy\Vultr\Api\Application;
 use Illuminate\Support\Facades\App;
-use Octopy\Vultr\Api\OperatingSystem;
+use Octopy\Vultr\Api\ApplicationApi;
+use Octopy\Vultr\Api\OperatingSystemApi;
 use Octopy\Vultr\Adapter\DefaultAdapter;
 use Octopy\Vultr\Adapter\AdapterInterface;
 
 /**
- * @property Account         account
- * @property Application     application
- * @property Plan            plan
- * @property OperatingSystem operatingSystem
- * @property Region          region
+ * @property AccountApi         account
+ * @property ApplicationApi     application
+ * @property PlanApi            plan
+ * @property OperatingSystemApi operatingSystem
+ * @property RegionApi          region
+ * @property InstanceApi        instance
  */
 class Client
 {
@@ -129,7 +131,7 @@ class Client
 	 */
 	private function getClass(string $class) : AbstractApi
 	{
-		$class = (string) Str::of($class)->studly()->prepend('Octopy\\Vultr\\Api\\');
+		$class = (string) Str::of($class)->studly()->prepend('Octopy\\Vultr\\Api\\')->append('Api');
 
 		throw_unless(class_exists($class), new InvalidArgumentException(
 			'The class ' . $class . ' does not exists.'

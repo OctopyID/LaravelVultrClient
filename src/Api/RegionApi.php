@@ -1,48 +1,26 @@
 <?php
 
+/** @noinspection PhpUnused */
+
 namespace Octopy\Vultr\Api;
 
 use Closure;
 use Throwable;
 use Exception;
 use Octopy\Vultr\Relation;
+use Octopy\Vultr\Entity\Region;
 use Illuminate\Support\Collection;
-use Octopy\Vultr\Handler\RegionHandler;
-use Octopy\Vultr\Handler\AbstractHandler;
+use Octopy\Vultr\Api\Contracts\Plan;
+use Octopy\Vultr\Entity\AbstractEntity;
 
-class Region extends AbstractApi
+class RegionApi extends AbstractApi implements Plan
 {
 	/**
-	 * @const string
+	 * @return Region|AbstractEntity
 	 */
-	public const ALL = 'all';
-
-	/**
-	 * @const string
-	 */
-	public const BARE_METAL = 'vbm';
-
-	/**
-	 * @const string
-	 */
-	public const CLOUD_COMPUTE = 'vc2';
-
-	/**
-	 * @const string
-	 */
-	public const HIGH_FREQUENCY = 'vhf';
-
-	/**
-	 * @const string
-	 */
-	public const DEDICATED_CLOUD = 'vdc';
-
-	/**
-	 * @return RegionHandler|AbstractHandler
-	 */
-	public function listRegions() : RegionHandler|AbstractHandler
+	public function listRegions() : Region|AbstractEntity
 	{
-		return $this->handle(new RegionHandler(
+		return $this->handle(new Region(
 			$this->adapter->get('regions')
 		));
 	}
@@ -65,9 +43,7 @@ class Region extends AbstractApi
 
 		$result = $this->adapter->get('/regions/' . $id . '/availability', compact('type'));
 
-		return collect(
-			$result['available_plans']
-		);
+		return collect($result['available_plans']);
 	}
 
 	/**
@@ -77,7 +53,7 @@ class Region extends AbstractApi
 	 */
 	public function listAvailableCloudCompute(string $id) : Collection
 	{
-		return $this->listAvailableComputeInRegion($id, 'vc2');
+		return $this->listAvailableComputeInRegion($id, Plan::CLOUD_COMPUTE);
 	}
 
 	/**
@@ -87,7 +63,7 @@ class Region extends AbstractApi
 	 */
 	public function listAvailableHighFrequency(string $id) : Collection
 	{
-		return $this->listAvailableComputeInRegion($id, 'vhf');
+		return $this->listAvailableComputeInRegion($id, Plan::HIGH_FREQUENCY);
 	}
 
 	/**
@@ -97,7 +73,7 @@ class Region extends AbstractApi
 	 */
 	public function listAvailableDedicatedCloud(string $id) : Collection
 	{
-		return $this->listAvailableComputeInRegion($id, 'vdc');
+		return $this->listAvailableComputeInRegion($id, Plan::DEDICATED_CLOUD);
 	}
 
 	/**
@@ -107,16 +83,16 @@ class Region extends AbstractApi
 	 */
 	public function listAvailableBareMetal(string $id) : Collection
 	{
-		return $this->listAvailableComputeInRegion($id, 'vbm');
+		return $this->listAvailableComputeInRegion($id, Plan::BARE_METAL);
 	}
 
 	/**
 	 * @param  string       $type
 	 * @param  Closure|null $callback
 	 * @param  string       $alias
-	 * @return Region
+	 * @return RegionApi
 	 */
-	public function withAvailableComputeInRegion(string $type = 'all', Closure|null $callback = null, string $alias = 'plans') : Region
+	public function withAvailableComputeInRegion(string $type = 'all', Closure|null $callback = null, string $alias = 'plans') : RegionApi
 	{
 		return $this->with([
 			'listAvailableComputeInRegion' => function (Relation $relation) use ($type, $alias, $callback) {
@@ -136,40 +112,40 @@ class Region extends AbstractApi
 	/**
 	 * @param  Closure|null $callback
 	 * @param  string       $alias
-	 * @return Region
+	 * @return RegionApi
 	 */
-	public function withAvailableCloudCompute(Closure|null $callback = null, string $alias = 'plans') : Region
+	public function withAvailableCloudCompute(Closure|null $callback = null, string $alias = 'plans') : RegionApi
 	{
-		return $this->withAvailableComputeInRegion(Region::CLOUD_COMPUTE, $callback, $alias);
+		return $this->withAvailableComputeInRegion(Plan::CLOUD_COMPUTE, $callback, $alias);
 	}
 
 	/**
 	 * @param  Closure|null $callback
 	 * @param  string       $alias
-	 * @return Region
+	 * @return RegionApi
 	 */
-	public function withAvailableHighFrequency(Closure|null $callback = null, string $alias = 'plans') : Region
+	public function withAvailableHighFrequency(Closure|null $callback = null, string $alias = 'plans') : RegionApi
 	{
-		return $this->withAvailableComputeInRegion(Region::HIGH_FREQUENCY, $callback, $alias);
+		return $this->withAvailableComputeInRegion(Plan::HIGH_FREQUENCY, $callback, $alias);
 	}
 
 	/**
 	 * @param  Closure|null $callback
 	 * @param  string       $alias
-	 * @return Region
+	 * @return RegionApi
 	 */
-	public function withAvailableDedicatedCloud(Closure|null $callback = null, string $alias = 'plans') : Region
+	public function withAvailableDedicatedCloud(Closure|null $callback = null, string $alias = 'plans') : RegionApi
 	{
-		return $this->withAvailableComputeInRegion(Region::DEDICATED_CLOUD, $callback, $alias);
+		return $this->withAvailableComputeInRegion(Plan::DEDICATED_CLOUD, $callback, $alias);
 	}
 
 	/**
 	 * @param  Closure|null $callback
 	 * @param  string       $alias
-	 * @return Region
+	 * @return RegionApi
 	 */
-	public function withAvailableBareMetal(Closure|null $callback = null, string $alias = 'plans') : Region
+	public function withAvailableBareMetal(Closure|null $callback = null, string $alias = 'plans') : RegionApi
 	{
-		return $this->withAvailableComputeInRegion(Region::BARE_METAL, $callback, $alias);
+		return $this->withAvailableComputeInRegion(Plan::BARE_METAL, $callback, $alias);
 	}
 }

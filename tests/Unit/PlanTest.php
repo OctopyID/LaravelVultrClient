@@ -3,10 +3,10 @@
 namespace Octopy\Vultr\Tests\Unit;
 
 use Throwable;
-use Octopy\Vultr\Api\Plan;
+use Octopy\Vultr\Api\PlanApi;
+use Octopy\Vultr\Entity\Plan;
+use Octopy\Vultr\Entity\BareMetal;
 use Octopy\Vultr\Tests\VultrTestCase;
-use Octopy\Vultr\Handler\PlanHandler;
-use Octopy\Vultr\Handler\BareMetalPlanHandler;
 
 class PlanTest extends VultrTestCase
 {
@@ -15,7 +15,7 @@ class PlanTest extends VultrTestCase
 	 */
 	public function testPlan()
 	{
-		$this->assertInstanceOf(Plan::class, $this->vultr->plan);
+		$this->assertInstanceOf(PlanApi::class, $this->vultr->plan);
 	}
 
 	/**
@@ -23,15 +23,15 @@ class PlanTest extends VultrTestCase
 	 */
 	public function testPlans()
 	{
-		$mock = new Plan($this->adapter(
+		$mock = new PlanApi($this->adapter(
 			$data = $this->decodeJSON('plans/plan.json')
 		));
 
 		$fake = $mock->listPlans();
 
-		$this->assertInstanceOf(PlanHandler::class, $mock->listHighComputePlans());
-		$this->assertInstanceOf(PlanHandler::class, $mock->listCloudComputePlans());
-		$this->assertInstanceOf(PlanHandler::class, $mock->listDedicatedCloudPlans());
+		$this->assertInstanceOf(Plan::class, $mock->listHighFrequencyPlans());
+		$this->assertInstanceOf(Plan::class, $mock->listCloudComputePlans());
+		$this->assertInstanceOf(Plan::class, $mock->listDedicatedCloudPlans());
 
 		$this->assertEquals($data['plans'][0], $fake->first()->toArray());
 
@@ -44,11 +44,11 @@ class PlanTest extends VultrTestCase
 	 */
 	public function testBareMetals()
 	{
-		$mock = new Plan($this->adapter(
+		$mock = new PlanApi($this->adapter(
 			$data = $this->decodeJSON('plans/bare-metal.json')
 		));
 
-		$this->assertInstanceOf(BareMetalPlanHandler::class, $fake = $mock->listBareMetalPlans());
+		$this->assertInstanceOf(BareMetal::class, $fake = $mock->listBareMetalPlans());
 
 		$this->assertEquals($data['plans_metal'][0], $fake->first()->toArray());
 

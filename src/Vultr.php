@@ -2,22 +2,24 @@
 
 namespace Octopy\Vultr;
 
-use Octopy\Vultr\Api\Plan;
-use Octopy\Vultr\Api\Region;
-use Octopy\Vultr\Api\Account;
-use Octopy\Vultr\Api\Application;
-use Octopy\Vultr\Api\OperatingSystem;
+use Octopy\Vultr\Api\PlanApi;
+use Octopy\Vultr\Api\RegionApi;
+use Octopy\Vultr\Api\AccountApi;
+use Octopy\Vultr\Api\InstanceApi;
+use Octopy\Vultr\Api\ApplicationApi;
 use Illuminate\Support\Facades\Facade;
+use Octopy\Vultr\Api\OperatingSystemApi;
 
 /**
  * @method static noCache()
  * @method static cache(int $minutes)
  * @method static token(string $token)
- * @method static |Account account()
- * @method static |Application application()
- * @method static |Plan plan()
- * @method static |OperatingSystem operatingSystem()
- * @method static |Region region()
+ * @method static |AccountApi account()
+ * @method static |ApplicationApi application()
+ * @method static |PlanApi plan()
+ * @method static |OperatingSystemApi operatingSystem()
+ * @method static |RegionApi region()
+ * @method static |InstanceApi instance()
  */
 class Vultr extends Facade
 {
