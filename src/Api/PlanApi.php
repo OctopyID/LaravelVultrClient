@@ -58,7 +58,7 @@ class PlanApi extends AbstractApi implements PlanContract
 		));
 
 		return new Plan(
-			$this->adapter->get('plans', compact('type'))
+			$this->adapter()->get('plans', compact('type'))
 		);
 	}
 
@@ -68,7 +68,7 @@ class PlanApi extends AbstractApi implements PlanContract
 	public function listBareMetalPlans() : BareMetal
 	{
 		return new BareMetal(
-			$this->adapter->get('plans-metal')
+			$this->adapter()->get('plans-metal')
 		);
 	}
 }

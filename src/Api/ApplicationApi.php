@@ -20,7 +20,7 @@ class ApplicationApi extends AbstractApi
 	public function listApplications() : Application
 	{
 		return new Application(
-			$this->adapter->get('applications')
+			$this->adapter()->get('applications')
 		);
 	}
 }

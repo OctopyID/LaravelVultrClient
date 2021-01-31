@@ -12,7 +12,7 @@ class OperatingSystemApi extends AbstractApi
 	public function listImages() : OperatingSystem
 	{
 		return new OperatingSystem(
-			$this->adapter->get('os')
+			$this->adapter()->get('os')
 		);
 	}
 }

@@ -21,7 +21,7 @@ class OperatingSystemTest extends VultrTestCase
 	 * @return void
 	 * @throws Throwable
 	 */
-	public function testGetApplications()
+	public function testListImages()
 	{
 		$mock = new OperatingSystemApi($this->adapter(
 			$data = $this->decodeJSON('operating-system.json')

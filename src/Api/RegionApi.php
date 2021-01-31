@@ -21,7 +21,7 @@ class RegionApi extends AbstractApi implements Plan
 	public function listRegions() : Region|AbstractEntity
 	{
 		return $this->handle(new Region(
-			$this->adapter->get('regions')
+			$this->adapter()->get('regions')
 		));
 	}
 
@@ -41,7 +41,7 @@ class RegionApi extends AbstractApi implements Plan
 			'Unknown type, the allowed type is ' . implode(', ', $types)
 		));
 
-		$result = $this->adapter->get('/regions/' . $id . '/availability', compact('type'));
+		$result = $this->adapter()->get('/regions/' . $id . '/availability', compact('type'));
 
 		return collect($result['available_plans']);
 	}

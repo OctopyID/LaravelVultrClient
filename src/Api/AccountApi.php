@@ -12,7 +12,7 @@ class AccountApi extends AbstractApi
 	public function getAccountInfo() : Account
 	{
 		return new Account(
-			$this->adapter->get('account')
+			$this->adapter()->get('account')
 		);
 	}
 }
