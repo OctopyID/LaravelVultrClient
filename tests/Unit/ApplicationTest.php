@@ -21,7 +21,7 @@ class ApplicationTest extends VultrTestCase
 	 * @return void
 	 * @throws Throwable
 	 */
-	public function testGetApplications()
+	public function testListApplications()
 	{
 		$mock = new ApplicationApi($this->adapter(
 			$data = $this->decodeJSON('application.json')

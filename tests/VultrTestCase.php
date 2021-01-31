@@ -45,7 +45,10 @@ class VultrTestCase extends TestCase
 	protected function adapter(array $data = []) : AdapterInterface|MockInterface
 	{
 		return $this->mock(AdapterInterface::class, function (MockInterface $mock) use ($data) {
-			$mock->shouldReceive('get')->andReturn($data);
+			$mock->shouldReceive([
+				'query' => $mock,
+				'get'   => $data,
+			]);
 		});
 	}
 

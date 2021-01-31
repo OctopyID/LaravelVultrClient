@@ -84,6 +84,14 @@ abstract class AbstractApi
 	}
 
 	/**
+	 * @return AdapterInterface
+	 */
+	protected function adapter() : AdapterInterface
+	{
+		return $this->adapter->query($this->getQueries());
+	}
+
+	/**
 	 * @param  AbstractEntity $handler
 	 * @return AbstractEntity
 	 */
