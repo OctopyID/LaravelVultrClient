@@ -19,6 +19,11 @@ class DefaultAdapter implements AdapterInterface
 	protected array $headers = [];
 
 	/**
+	 * @var array
+	 */
+	protected array $queries = [];
+
+	/**
 	 * @var bool
 	 */
 	protected bool $debug = false;
@@ -84,6 +89,8 @@ class DefaultAdapter implements AdapterInterface
 	 */
 	public function handle(string $method, string $path, array $query = []) : array|null
 	{
+		$query = array_merge($this->queries, $query);
+
 		if ($this->cache > 0) {
 			return Cache::remember($path . '?query=' . md5(serialize($query)), $this->cache, function () use ($method, $path, $query) {
 				return $this->send($method, $path, $query);
@@ -141,6 +148,17 @@ class DefaultAdapter implements AdapterInterface
 	public function delete(string $path, array $query = []) : array|null
 	{
 		return $this->handle('DELETE', $path, $query);
+	}
+
+	/**
+	 * @param  array $query
+	 * @return AdapterInterface
+	 */
+	public function query(array $query) : AdapterInterface
+	{
+		$this->queries = $query;
+
+		return $this;
 	}
 
 	/**

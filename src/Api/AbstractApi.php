@@ -4,11 +4,20 @@ namespace Octopy\Vultr\Api;
 
 use Closure;
 use Octopy\Vultr\Relation;
+use Illuminate\Support\Str;
 use Octopy\Vultr\Handler\AbstractHandler;
 use Octopy\Vultr\Adapter\AdapterInterface;
 
 abstract class AbstractApi
 {
+	/**
+	 * @var array
+	 */
+	protected array $queries = [];
+
+	/**
+	 * @var array
+	 */
 	protected array $relations = [];
 
 	/**
@@ -17,6 +26,22 @@ abstract class AbstractApi
 	 */
 	public function __construct(protected AdapterInterface $adapter)
 	{
+	}
+
+	/**
+	 * @param  string $method
+	 * @param  array  $args
+	 * @return mixed
+	 */
+	public function __call(string $method, $args = []) : mixed
+	{
+		if (preg_match('/^where/', $method)) {
+			return $this->where([
+				Str::snake(substr($method, 5)) => $args[0] ?? null,
+			]);
+		}
+
+		return $this->$method(...$args);
 	}
 
 	/**
@@ -32,6 +57,30 @@ abstract class AbstractApi
 		}
 
 		return $this;
+	}
+
+	/**
+	 * @param  string|array         $name
+	 * @param  string|int|bool|null $value
+	 * @return AbstractApi
+	 */
+	public function where(string|array $name, string|int|bool|null $value = null) : AbstractApi
+	{
+		if (is_array($name)) {
+			$this->queries = array_merge($this->queries, $name);
+		} else {
+			$this->queries[$name] = $value;
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getQueries() : array
+	{
+		return $this->queries;
 	}
 
 	/**
