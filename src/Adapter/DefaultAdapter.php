@@ -2,6 +2,8 @@
 
 namespace Octopy\Vultr\Adapter;
 
+use Closure;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Client\PendingRequest;
@@ -82,72 +84,84 @@ class DefaultAdapter implements AdapterInterface
 	}
 
 	/**
-	 * @param  string $method
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
+	 * @param  string       $method
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
 	 */
-	public function handle(string $method, string $path, array $query = []) : array|null
+	public function handle(string $method, string $path, array $query = [], Closure $callback = null) : Collection|array|null
 	{
 		$query = array_merge($this->queries, $query);
 
 		if ($this->cache > 0) {
-			return Cache::remember($path . '?query=' . md5(serialize($query)), $this->cache, function () use ($method, $path, $query) {
+			$response = Cache::remember($path . '?query=' . md5(serialize($query)), $this->cache, function () use ($method, $path, $query) {
 				return $this->send($method, $path, $query);
 			});
+		} else {
+			$response = $this->send($method, $path, $query);
 		}
 
-		return $this->send($method, $path, $query);
+		if ($callback) {
+			return $callback($response) ?? $response;
+		}
+
+		return $response;
 	}
 
 	/**
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
 	 */
-	public function get(string $path, array $query = []) : array|null
+	public function get(string $path, array $query = [], Closure $callback = null) : Collection|array|null
 	{
-		return $this->handle('GET', $path, $query);
+		return $this->handle('GET', $path, $query, $callback);
 	}
 
 	/**
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
 	 */
-	public function put(string $path, array $query = []) : array|null
+	public function put(string $path, array $query = [], Closure $callback = null) : Collection|array|null
 	{
-		return $this->handle('PUT', $path, $query);
+		return $this->handle('PUT', $path, $query, $callback);
 	}
 
 	/**
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
 	 */
-	public function post(string $path, array $query = []) : array|null
+	public function post(string $path, array $query = [], Closure $callback = null) : Collection|array|null
 	{
-		return $this->handle('POST', $path, $query);
+		return $this->handle('POST', $path, $query, $callback);
 	}
 
 	/**
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
 	 */
-	public function patch(string $path, array $query = []) : array|null
+	public function patch(string $path, array $query = [], Closure $callback = null) : Collection|array|null
 	{
-		return $this->handle('PATCH', $path, $query);
+		return $this->handle('PATCH', $path, $query, $callback);
 	}
 
 	/**
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
 	 */
-	public function delete(string $path, array $query = []) : array|null
+	public function delete(string $path, array $query = [], Closure $callback = null) : Collection|array|null
 	{
-		return $this->handle('DELETE', $path, $query);
+		return $this->handle('DELETE', $path, $query, $callback);
 	}
 
 	/**
@@ -165,9 +179,9 @@ class DefaultAdapter implements AdapterInterface
 	 * @param  string $method
 	 * @param  string $path
 	 * @param  array  $query
-	 * @return array|null
+	 * @return Collection|array|null
 	 */
-	public function send(string $method, string $path, array $query = []) : array|null
+	public function send(string $method, string $path, array $query = []) : Collection|array|null
 	{
 		return (match ($method) {
 			'GET' => $this->getClient()->get($path, $query),

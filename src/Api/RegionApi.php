@@ -33,9 +33,9 @@ class RegionApi extends AbstractApi
 	public function listAvailableComputeInRegion(string $id, string $type = 'all') : Collection
 	{
 		if (Plan::except([])->validate($type)) {
-			$result = $this->adapter()->get('/regions/' . $id . '/availability', compact('type'));
-
-			return collect($result['available_plans']);
+			return $this->adapter()->get('/regions/' . $id . '/availability', compact('type'), function ($json) {
+				return collect($json['available_plans']);
+			});
 		}
 	}
 

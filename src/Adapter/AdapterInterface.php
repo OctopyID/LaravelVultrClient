@@ -2,6 +2,9 @@
 
 namespace Octopy\Vultr\Adapter;
 
+use Closure;
+use Illuminate\Support\Collection;
+
 interface AdapterInterface
 {
 	/**
@@ -35,53 +38,59 @@ interface AdapterInterface
 	public function headers(array $headers) : AdapterInterface;
 
 	/**
+	 * @param  string       $method
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
+	 */
+	public function handle(string $method, string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+
+	/**
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
+	 */
+	public function get(string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+
+	/**
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
+	 */
+	public function put(string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+
+	/**
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
+	 */
+	public function post(string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+
+	/**
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
+	 */
+	public function patch(string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+
+	/**
+	 * @param  string       $path
+	 * @param  array        $query
+	 * @param  Closure|null $callback
+	 * @return Collection|array|null
+	 */
+	public function delete(string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+
+	/**
 	 * @param  string $method
 	 * @param  string $path
 	 * @param  array  $query
-	 * @return array|null
+	 * @return Collection|array|null
 	 */
-	public function handle(string $method, string $path, array $query = []) : array|null;
-
-	/**
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
-	 */
-	public function get(string $path, array $query = []) : array|null;
-
-	/**
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
-	 */
-	public function put(string $path, array $query = []) : array|null;
-
-	/**
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
-	 */
-	public function post(string $path, array $query = []) : array|null;
-
-	/**
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
-	 */
-	public function patch(string $path, array $query = []) : array|null;
-
-	/**
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
-	 */
-	public function delete(string $path, array $query = []) : array|null;
-
-	/**
-	 * @param  string $method
-	 * @param  string $path
-	 * @param  array  $query
-	 * @return array|null
-	 */
-	public function send(string $method, string $path, array $query = []) : array|null;
+	public function send(string $method, string $path, array $query = []) : Collection|array|null;
 }
