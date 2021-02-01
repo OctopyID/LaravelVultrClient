@@ -6,6 +6,7 @@ namespace Octopy\Vultr\Api;
 use Throwable;
 use Octopy\Vultr\Entity\Plan;
 use Octopy\Vultr\Entity\BareMetal;
+use Octopy\Vultr\Entity\AbstractEntity;
 use Octopy\Vultr\Api\Support\Plan as Support;
 
 class PlanApi extends AbstractApi
@@ -39,10 +40,10 @@ class PlanApi extends AbstractApi
 
 	/**
 	 * @param  string $type
-	 * @return Plan|BareMetal
+	 * @return Plan|BareMetal|AbstractEntity
 	 * @throws Throwable
 	 */
-	public function listPlans(string $type = 'all') : Plan|BareMetal
+	public function listPlans(string $type = 'all') : Plan|BareMetal|AbstractEntity
 	{
 		if ($type === 'metal') {
 			return $this->listBareMetalPlans();
@@ -50,18 +51,18 @@ class PlanApi extends AbstractApi
 
 		Support::except(Support::BARE_METAL)->validate($type);
 
-		return new Plan(
+		return $this->handle(new Plan(
 			$this->adapter()->get('plans', compact('type'))
-		);
+		));
 	}
 
 	/**
-	 * @return BareMetal
+	 * @return BareMetal|AbstractEntity
 	 */
-	public function listBareMetalPlans() : BareMetal
+	public function listBareMetalPlans() : BareMetal|AbstractEntity
 	{
-		return new BareMetal(
+		return $this->handle(new BareMetal(
 			$this->adapter()->get('plans-metal')
-		);
+		));
 	}
 }

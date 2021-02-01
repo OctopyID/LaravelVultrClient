@@ -3,6 +3,7 @@
 namespace Octopy\Vultr\Api;
 
 use Octopy\Vultr\Entity\Application;
+use Octopy\Vultr\Entity\AbstractEntity;
 
 class ApplicationApi extends AbstractApi
 {
@@ -15,12 +16,12 @@ class ApplicationApi extends AbstractApi
 	}
 
 	/**
-	 * @return Application
+	 * @return Application|AbstractEntity
 	 */
-	public function listApplications() : Application
+	public function listApplications() : Application|AbstractEntity
 	{
-		return new Application(
+		return $this->handle(new Application(
 			$this->adapter()->get('applications')
-		);
+		));
 	}
 }
