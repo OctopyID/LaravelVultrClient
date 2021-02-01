@@ -3,7 +3,6 @@
 namespace Octopy\Vultr\Adapter;
 
 use Closure;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Client\PendingRequest;
@@ -88,9 +87,9 @@ class DefaultAdapter implements AdapterInterface
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function handle(string $method, string $path, array $query = [], Closure $callback = null) : Collection|array|null
+	public function handle(string $method, string $path, array $query = [], Closure $callback = null) : mixed
 	{
 		$query = array_merge($this->queries, $query);
 
@@ -113,9 +112,9 @@ class DefaultAdapter implements AdapterInterface
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function get(string $path, array $query = [], Closure $callback = null) : Collection|array|null
+	public function get(string $path, array $query = [], Closure $callback = null) : mixed
 	{
 		return $this->handle('GET', $path, $query, $callback);
 	}
@@ -124,9 +123,9 @@ class DefaultAdapter implements AdapterInterface
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function put(string $path, array $query = [], Closure $callback = null) : Collection|array|null
+	public function put(string $path, array $query = [], Closure $callback = null) : mixed
 	{
 		return $this->handle('PUT', $path, $query, $callback);
 	}
@@ -135,9 +134,9 @@ class DefaultAdapter implements AdapterInterface
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function post(string $path, array $query = [], Closure $callback = null) : Collection|array|null
+	public function post(string $path, array $query = [], Closure $callback = null) : mixed
 	{
 		return $this->handle('POST', $path, $query, $callback);
 	}
@@ -146,9 +145,9 @@ class DefaultAdapter implements AdapterInterface
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function patch(string $path, array $query = [], Closure $callback = null) : Collection|array|null
+	public function patch(string $path, array $query = [], Closure $callback = null) : mixed
 	{
 		return $this->handle('PATCH', $path, $query, $callback);
 	}
@@ -157,9 +156,9 @@ class DefaultAdapter implements AdapterInterface
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function delete(string $path, array $query = [], Closure $callback = null) : Collection|array|null
+	public function delete(string $path, array $query = [], Closure $callback = null) : mixed
 	{
 		return $this->handle('DELETE', $path, $query, $callback);
 	}
@@ -179,9 +178,9 @@ class DefaultAdapter implements AdapterInterface
 	 * @param  string $method
 	 * @param  string $path
 	 * @param  array  $query
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function send(string $method, string $path, array $query = []) : Collection|array|null
+	public function send(string $method, string $path, array $query = []) : mixed
 	{
 		return (match ($method) {
 			'GET' => $this->getClient()->get($path, $query),

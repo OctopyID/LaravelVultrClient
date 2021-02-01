@@ -3,7 +3,6 @@
 namespace Octopy\Vultr\Adapter;
 
 use Closure;
-use Illuminate\Support\Collection;
 
 interface AdapterInterface
 {
@@ -42,55 +41,55 @@ interface AdapterInterface
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function handle(string $method, string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+	public function handle(string $method, string $path, array $query = [], Closure $callback = null) : mixed;
 
 	/**
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function get(string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+	public function get(string $path, array $query = [], Closure $callback = null) : mixed;
 
 	/**
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function put(string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+	public function put(string $path, array $query = [], Closure $callback = null) : mixed;
 
 	/**
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function post(string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+	public function post(string $path, array $query = [], Closure $callback = null) : mixed;
 
 	/**
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function patch(string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+	public function patch(string $path, array $query = [], Closure $callback = null) : mixed;
 
 	/**
 	 * @param  string       $path
 	 * @param  array        $query
 	 * @param  Closure|null $callback
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function delete(string $path, array $query = [], Closure $callback = null) : Collection|array|null;
+	public function delete(string $path, array $query = [], Closure $callback = null) : mixed;
 
 	/**
 	 * @param  string $method
 	 * @param  string $path
 	 * @param  array  $query
-	 * @return Collection|array|null
+	 * @return mixed
 	 */
-	public function send(string $method, string $path, array $query = []) : Collection|array|null;
+	public function send(string $method, string $path, array $query = []) : mixed;
 }
